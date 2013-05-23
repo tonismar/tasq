@@ -4,6 +4,7 @@ tasq
 A corporative task manager to learn Zend.
 
 This project will be:
+
 	- a web interface to
 		- manager users (admin)
 		- manager users tasks (admin)
