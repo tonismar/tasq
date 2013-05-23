@@ -1,18 +1,12 @@
--- create by Tonismar R. Bernardo
--- date 21/05/2013
--- tonismar.at.gmail.com
-
+PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
-
-create table owner (
+CREATE TABLE owner (
     id integer not null primary key autoincrement,
     nome varchar(50) not null,
     senha varchar(15) not null,
-    usuario varchar(20) not null,
-    unique key 'usuario' ('usuario')
+    usuario varchar(20) not null
 );
-
-create table tasq (
+CREATE TABLE tasq (
     id integer not null primary key autoincrement,
     descricao varchar(100),
     prioridade integer not null default 1,
@@ -22,11 +16,12 @@ create table tasq (
     titulo varchar(25),
     foreign key(id_owner) references owner(id)
 );
-
-create table stepping (
+CREATE TABLE stepping (
     id integer not null primary key autoincrement,
     id_tasq integer not null,
     descricao varchar(100),
     dt_step varchar(8),
     foreign key(id_tasq) references tasq(id)
 );
+CREATE UNIQUE INDEX usuario_idx on owner (usuario);
+COMMIT;
