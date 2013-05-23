@@ -20,6 +20,9 @@
         <controllerFile controllerName="Stepping">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="User">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory enabled="false"/>
@@ -49,6 +52,12 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="owner">
             <viewScriptFile forActionName="owner"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="owner">
+            <viewScriptFile forActionName="loginform"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="User">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
