@@ -3,4 +3,8 @@ LICENSE.txt
 README.txt
 demos/
 extras/documentation
-
+.buildpath
+.project
+.settings/
+public/info.php
+application/views/scripts/index/index_original.phtml
