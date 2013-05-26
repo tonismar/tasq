@@ -3,16 +3,21 @@
 	<?=$this->escape($this->title);?>
 </h1>
 <form method='post' action='<?=$this->escape($this->action);?>'>
-	<table>
-		<tr>
-			<td><?=$this->escape($this->usuario);?></td>
-			<td><input type='text' name='usuario'></td>
-		</tr>
-		<tr>
-			<td><?=$this->escape($this->senha);?></td>
-			<td><input type='password' name='senha'></td>
-		</tr>
-	</table>
+	<div>
+		<div>
+			<? if ($this->erro):?>
+				<h4>Usu‡rio ou senha inv‡lidos!</h4><br>
+			<? endif; ?>
+		</div>
+		<div>
+			<?=$this->escape($this->usuario);?><br>
+			<input type='text' name='usuario'><br>
+		</div>
+		<div>
+			<?=$this->escape($this->senha);?><br>
+			<input type='password' name='senha'><br>
+		</div>
+	</div>
 	<input type='submit' name='login' value='Login'>
 </form>
 <? include "footer.phtml"; ?>

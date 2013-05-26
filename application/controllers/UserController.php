@@ -13,6 +13,14 @@ class UserController extends Zend_Controller_Action
 	public function indexAction()
 	{
 		// action body
+		$request = $this->getRequest();
+		$auth    = Zend_Auth::getInstance();
+		if(!$auth->hasIdentity()) {
+			$this->_redirect('/user/loginform');
+		}
+		else {
+			$this->_redirect('/user/userpage');
+		}
 	}
 
 	public function loginformAction()
@@ -20,22 +28,20 @@ class UserController extends Zend_Controller_Action
 		$request = $this->getRequest();
 		$this->view->assign('action', $request->getBaseURL()."/user/auth");
 		$this->view->assign('title', 'Login Form');
-		$this->view->assign('usuario', 'Usu‡rio');
+		$this->view->assign('usuario', 'Usuario');
 		$this->view->assign('senha', 'Senha');
 	}
 
 	public function authAction()
 	{
 		$request  = $this->getRequest();
-		$registry = Zend_Registry::getInstance();
+		$DB 	  = Zend_Registry::get('db');
 		$auth     = Zend_Auth::getInstance();
-
-		$DB = $registry['DB'];
 
 		$authAdapter = new Zend_Auth_Adapter_DbTable($DB);
 		$authAdapter->setTableName('owner')
-		->setIdentityColumn('usuario')
-		->setCredentialColumn('senha');
+					->setIdentityColumn('usuario')
+					->setCredentialColumn('senha');
 
 		$uname = $request->getParam('usuario');
 		$paswd = $request->getParam('senha');
@@ -49,9 +55,34 @@ class UserController extends Zend_Controller_Action
 			$auth->getStorage()->write($data);
 			$this->_redirect('/owner/index');
 		} else {
+			$this->view->erro = TRUE;
 			$this->_redirect('/user/loginform');
 		}
 	}
+	
+	public function userpageAction()
+	{
+		$auth = Zend_Auth::getInstance();
+		
+		if(!$auth->hasIdentity()){
+			$this->_redirect('/user/loginform');
+		}
+		
+		$request   = $this->getRequest();
+		$user      = $auth->getIdentity();
+		$real_name = $user->nome;
+		$usuario   = $user->usuario;
+		$logoutUrl = $request->getBaseURL(). '/user/logout';
+		
+		$this->view->assign('usuario', $real_name);
+		$this->view->assign('urllogout', $logoutUrl);
+	}
 
+	public function logoutAction()
+	{
+		$auth = Zend_Auth::getInstance();
+		$auth->clearIdentity();
+		$this->_redirect('/user');
+	}
 }
 
