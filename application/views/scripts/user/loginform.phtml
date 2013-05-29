@@ -5,8 +5,9 @@
 <form method='post' action='<?=$this->escape($this->action);?>'>
 	<div>
 		<div>
-			<? if ($this->erro):?>
-				<h4>Usuário ou senha inválidos!</h4><br>
+			<? echo "<pre>"; var_dump($this->options); echo "</pre>"; ?> 
+			<? if ($this->erro): ?>
+				<h3>Usu√°rio ou senha inv√°lidos!</h3>
 			<? endif; ?>
 		</div>
 		<div>

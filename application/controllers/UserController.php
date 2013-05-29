@@ -53,9 +53,8 @@ class UserController extends Zend_Controller_Action
 		if($result->isValid()) {
 			$data = $authAdapter->getResultRowObject(null,'senha');
 			$auth->getStorage()->write($data);
-			$this->_redirect('/owner/index');
+			$this->_redirect('/tasq/index');
 		} else {
-			$this->view->erro = TRUE;
 			$this->_redirect('/user/loginform');
 		}
 	}
